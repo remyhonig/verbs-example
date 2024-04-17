@@ -8,9 +8,13 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote')->hourly();
 
 Artisan::command('plus', function () {
-    \App\Events\OneEvent::fire();
+    $id = 171039784274231296;
+    \App\Events\OneEvent::fire(application_id: $id);
+    echo \App\States\ApplicationState::load($id)->counter;
 })->purpose('Increase counter');
 
 Artisan::command('minus', function () {
-    \App\Events\TwoEvent::fire();
+    $id = 171039784274231296;
+    \App\Events\TwoEvent::fire(application_id: $id);
+    echo \App\States\ApplicationState::load($id)->counter;
 })->purpose('Decrease counter');

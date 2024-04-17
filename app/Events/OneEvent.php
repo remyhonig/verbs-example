@@ -3,14 +3,17 @@
 namespace App\Events;
 
 use App\States\ApplicationState;
-use Thunk\Verbs\Attributes\Autodiscovery\AppliesToSingletonState;
+use Thunk\Verbs\Attributes\Autodiscovery\StateId;
 use Thunk\Verbs\Event;
 
-#[AppliesToSingletonState(ApplicationState::class)]
 class OneEvent extends Event
 {
-    public function handle(ApplicationState $state)
+    #[StateId(ApplicationState::class)]
+    public ?int $application_id = null;
+
+    public function apply(ApplicationState $state)
     {
         $state->counter++;
+        $state->updated_at = now();
     }
 }
